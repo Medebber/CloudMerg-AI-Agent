@@ -1,0 +1,88 @@
+.page-container {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  background:
+    radial-gradient(circle at top left, #dbeafe, transparent 40%),
+    radial-gradient(circle at bottom right, #e0e7ff, transparent 45%),
+    linear-gradient(135deg, #f8fafc, #eef2ff);
+
+  padding: 30px;
+}
+
+/* Main App Card */
+.app-box {
+  width: 100%;
+  max-width: 980px;
+  height: 92vh;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  box-shadow:
+    0 20px 60px rgba(30, 64, 175, 0.12),
+    0 6px 18px rgba(15, 23, 42, 0.05);
+
+  overflow: hidden;
+}
+
+  /* Header */
+.app-header {
+  padding: 24px 16px;
+  text-align: center;
+  background:
+    #4f6085; /* soft white gradient */
+  color: white;
+  border-bottom: 1px solid rgba(148,163,184,0.2);
+}
+
+.app-header .main-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white; /* dark text */
+}
+
+.app-header .subtitle {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: white; /* soft grey */
+}
+
+.main-title {
+  margin: 0;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+  color: white;
+}
+
+.subtitle {
+  margin-top: 6px;
+
+  font-size: 1rem;
+
+  color: white; /* override previous grey color */
+  opacity: 0.9; /* slightly softer than title */
+}
+
+.chat-section {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}

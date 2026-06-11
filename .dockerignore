@@ -1,0 +1,16 @@
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.git
+.gitignore
+frontend/node_modules
+frontend/build
+backend/venv
+backend/__pycache__
+backend/.env
+backend/Dockerfile
+frontend/Dockerfile
+docker-compose.yml

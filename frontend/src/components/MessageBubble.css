@@ -1,0 +1,90 @@
+/* Message Row */
+.message-row {
+  display: flex;
+  width: 100%;
+  font-size: 1.05rem;
+}
+
+/* User messages RIGHT */
+.message-row.user {
+  justify-content: flex-end;
+}
+
+/* Bot messages LEFT */
+.message-row.bot {
+  justify-content: flex-start;
+}
+
+/* Bubble Base */
+.bubble {
+  max-width: 72%;
+
+  padding: 16px 20px;
+
+  border-radius: 22px;
+
+  font-size: 1.05rem;
+  line-height: 1.6;
+
+  word-wrap: break-word;
+
+  position: relative;
+
+  transition: all 0.2s ease;
+
+  animation: fadeIn 0.25s ease;
+}
+
+/* USER BUBBLE */
+.bubble.user {
+  background:
+    linear-gradient(
+      135deg,
+      #3b82f6,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: white;
+
+  border-bottom-right-radius: 8px;
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,0.22),
+    0 4px 10px rgba(37,99,235,0.12);
+}
+
+/* BOT BUBBLE */
+.bubble.bot {
+  background: rgba(255,255,255,0.92);
+
+  color: #0f172a;
+
+  border: 1px solid rgba(226,232,240,0.9);
+
+  border-bottom-left-radius: 8px;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,0.06),
+    0 2px 6px rgba(15,23,42,0.04);
+
+  backdrop-filter: blur(10px);
+}
+
+/* Hover Effect */
+.bubble:hover {
+  transform: translateY(-1px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

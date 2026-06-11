@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+langchain-mistralai
+langchain-chroma
+langchain-classic
+langchain-community
+langchain-text-splitters
+pypdf
+
