@@ -2,15 +2,13 @@
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from src.engine import get_chat_response_stream
 from dotenv import load_dotenv
 import os
-from fastapi.responses import StreamingResponse
-import json
 
 load_dotenv()
-
 app = FastAPI()
 
 class ChatRequest(BaseModel):
@@ -38,4 +36,7 @@ async def chat_endpoint(request: ChatRequest):
     # Use text/event-stream or text/plain so the frontend can read it easily
     return StreamingResponse(generate(), media_type="text/event-stream")
 
-app.mount("/", StaticFiles(directory="frontend_build", html=True), name="frontend")
+frontend_dir = os.path.join(os.path.dirname(__file__), "..", "frontend", "build")
+frontend_dir = os.path.abspath(frontend_dir)
+if os.path.isdir(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
