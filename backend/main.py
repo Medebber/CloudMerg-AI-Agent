@@ -36,7 +36,11 @@ async def chat_endpoint(request: ChatRequest):
     # Use text/event-stream or text/plain so the frontend can read it easily
     return StreamingResponse(generate(), media_type="text/event-stream")
 
-frontend_dir = os.path.join(os.path.dirname(__file__), "..", "frontend", "build")
-frontend_dir = os.path.abspath(frontend_dir)
-if os.path.isdir(frontend_dir):
+base_dir = os.path.dirname(__file__)
+frontend_dirs = [
+    os.path.join(base_dir, "..", "frontend_build"),
+    os.path.join(base_dir, "..", "frontend", "build"),
+]
+frontend_dir = next((os.path.abspath(d) for d in frontend_dirs if os.path.isdir(os.path.abspath(d))), None)
+if frontend_dir:
     app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
