@@ -4,6 +4,8 @@ import MessageBubble from './MessageBubble';
 import './ChatWindow2.css';
 
 function ChatWindow() {
+  // Base URL for API. In production (served by backend) keep blank so relative paths work.
+  const API_BASE = process.env.REACT_APP_API_URL || '';
   const [messages, setMessages] = useState([
     {
       sender: 'bot',
@@ -35,7 +37,7 @@ function ChatWindow() {
     setIsTyping(true);
 
     try {
-      const res = await fetch('/chat', {
+      const res = await fetch(`${API_BASE}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
