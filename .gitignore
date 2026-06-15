@@ -1,0 +1,29 @@
+# Node
+node_modules/
+frontend/node_modules/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+backend/.env
+.env.local
+.env.*.local
+
+# Build
+build/
+frontend_build/
+dist/
+
+# Editors
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
