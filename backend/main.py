@@ -15,28 +15,9 @@ load_dotenv()
 app = FastAPI()
 
 # ==========================================
-# 1. FRONTEND MOUNTING (Do this first!)
+# 1. APPLICATION (API endpoints)
 # ==========================================
 base_dir = os.path.abspath(os.path.dirname(__file__))
-frontend_dirs = [
-    os.path.join(base_dir, "frontend_build"),
-    os.path.join(base_dir, "..", "frontend_build"),
-    os.path.join(base_dir, "..", "frontend", "build"),
-]
-
-frontend_dir = next((os.path.abspath(d) for d in frontend_dirs if os.path.isdir(os.path.abspath(d))), None)
-
-if frontend_dir:
-    print(f"Serving frontend from: {frontend_dir}")
-    # Mounting to "/" acts as a fallback handler, keep it clean
-    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
-else:
-    print("WARNING: No frontend build directory found. Running backend API only.")
-    
-    # Optional: Root helper if frontend isn't built yet so you don't get a blind 404
-    @app.get("/")
-    async def root_health_check():
-        return {"status": "healthy", "message": "Backend is running, but frontend assets are missing."}
 
 # ==========================================
 # 2. API ENDPOINTS
@@ -66,8 +47,30 @@ async def chat_endpoint(request: ChatRequest):
     # Use text/event-stream or text/plain so the frontend can read it easily
     return StreamingResponse(generate(), media_type="text/event-stream")
 
+
 # ==========================================
-# 3. PRODUCTION PORT BINDING FOR RENDER
+# 3. FRONTEND MOUNTING (Serve built React app)
+#    Mount after API endpoints so routes like /chat remain reachable
+# ==========================================
+frontend_dirs = [
+    os.path.join(base_dir, "frontend_build"),
+    os.path.join(base_dir, "..", "frontend_build"),
+    os.path.join(base_dir, "..", "frontend", "build"),
+]
+
+frontend_dir = next((os.path.abspath(d) for d in frontend_dirs if os.path.isdir(os.path.abspath(d))), None)
+
+if frontend_dir:
+    print(f"Serving frontend from: {frontend_dir}")
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+else:
+    print("WARNING: No frontend build directory found. Running backend API only.")
+    @app.get("/")
+    async def root_health_check():
+        return {"status": "healthy", "message": "Backend is running, but frontend assets are missing."}
+
+# ==========================================
+# 4. PRODUCTION PORT BINDING FOR RENDER
 # ==========================================
 if __name__ == "__main__":
     # Render passes a dynamic port in os.environ. Local runs default to 8000
