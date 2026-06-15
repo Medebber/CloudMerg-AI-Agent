@@ -7,7 +7,7 @@ function App() {
     <div className="page-container">
       <div className="app-box">
         <header className="app-header">
-          <h1 className="main-title">CloudMerg AI Assistant</h1>
+          <h1 className="main-title">CloudMerg AI-Agent</h1>
           <p className="subtitle">Qatar's Digital Future, Powered by AI</p>
         </header>
         <div className="chat-section">
